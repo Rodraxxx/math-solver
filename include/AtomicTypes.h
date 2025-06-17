@@ -1,0 +1,26 @@
+#ifndef ATOMIC_TYPES_H
+#define ATOMIC_TYPES_H
+
+enum class AtomicTypes {
+  // NULLTYPE
+  
+  NULLTYPE,
+  // ERROR TYPES
+
+  UNDEFINED,
+  UNDETERMINED,
+  DNE,
+  // GENERAL
+
+  VARIABLE,
+  CONSTANT,
+  // NUMBERS
+
+  INTEGER,
+  REAL,
+  // DISCRETE MATH
+
+  PROPOSITION
+};
+
+#endif

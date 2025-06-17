@@ -1,0 +1,5 @@
+ARITHMETIC
+<product>=::<exp><times><exp>
+<sum>=::<exp><plus><exp>|<exp><minus><exp>
+<exp>=::<number>|<left_par><number><right_par>
+
