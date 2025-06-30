@@ -13,13 +13,16 @@ enum class Functions {
   // NULL OPERATOR
 
   NULLOPERATOR,
+
   // IGNORE OPERATOR
 
   IDENTITY, // x -> x 
+
   //BASIC ARITHMETIC OPERATORS
 
   ADDITION,
   SUBTRACTION,
+  UNSUBTRACTION, // UNARY SUBTRACTION
   MULTIPLICATION,
   DIVISION,
   EXPONENTIATION,
@@ -28,13 +31,16 @@ enum class Functions {
   PROOT, // PRINCIPAL ROOT
   ROOT,
   LOG,
+  CLOG, // COMPLEX LOG
   ABS,
+
   // SPECIAL ARITHMETIC OPERATIONS
 
   TETRATION,
-  SROOT, // https://en.wikipedia.org/wiki/Tetration#Inverse_operations
-  NTHSROOT,
+  SSRT, // https://en.wikipedia.org/wiki/Tetration#Inverse_operations
+  SROOT,
   SLOG,
+
   // RELATIONAL OPERATORS
 
   EQUALS,
@@ -42,6 +48,7 @@ enum class Functions {
   LT, // LOWER THAN
   GE, // GREATER OR EQUAL TO
   LE, // LOWER OR EQUAL TO
+
   // ELLIPTIC TRIG FUNCTIONS
 
   SIN,
@@ -56,6 +63,7 @@ enum class Functions {
   ARCCSC,
   ARCSEC,
   ARCCOT,
+
   // HYPERBOLIC TRIG FUNCTIONS
 
   SINH,
@@ -70,6 +78,7 @@ enum class Functions {
   ARCCSCH,
   ARCSECH,
   ARCCOTH,
+
   // SPHERICAL TRIG FUNCTIONS
 
   VER, // VERSINE
@@ -90,6 +99,7 @@ enum class Functions {
   ARCHVC, // ARCHAVERCOSINE
   ARCHCV, // ARCHACOVERSINE
   ARCHCC, // ARCHACOVERCOSINE
+
   // SPECIAL TRIG FUNCTIONS
 
   ATAN2,
@@ -106,10 +116,12 @@ enum class Functions {
   si,
   CIN,
   CI,
+
   // HYPERBOLIC INTEGRAL TRIG FUNCTIONS
 
   SHI,
   CHI,
+
   // DEPRECATED TRIG FUNCTIONS
 
   CIS, // https://en.wikipedia.org/wiki/Cis_(mathematics)
@@ -120,6 +132,7 @@ enum class Functions {
   ARCEXS, // ARC EXSECANT
   ARCEXCS, // ARC EXCOSECANT
   // https://en.wikipedia.org/wiki/Chord_(geometry)
+
   // COMBINATORICS & NUMBER THEORY
 
   GCD,
@@ -139,7 +152,6 @@ enum class Functions {
   SIGMA, // DIVISOR FUNCTION https://en.wikipedia.org/wiki/Divisor_function
   PARTITION, // PARTITION FUNCTION https://en.wikipedia.org/wiki/Partition_function_(number_theory)
   MU, // MÖBIUS FUNCTION https://en.wikipedia.org/wiki/M%C3%B6bius_function
-  
 
   // SPECIAL NUMBER THEORY
 
@@ -149,8 +161,40 @@ enum class Functions {
   PRIMORIAL,
 
   // PIECEWISE SPECIAL FUNCTIONS
+
   DDELTA, // DIRAC DELTA https://en.wikipedia.org/wiki/Dirac_delta_function
   HEAVISIDE, // https://en.wikipedia.org/wiki/Heaviside_step_function
+
+  // PROPOSITIONAL LOGIC
+
+  AND,
+  OR,
+  NOT,
+  XOR,
+  NAND,
+  NOR,
+  XNOR,
+
+  // PROOFS AND METALOGIC
+
+  IMPLIES,
+  IF,
+  IFF,
+  
+  // SETS AND FIRST ORDER LOGIC
+
+  SETBUILDER, // https://en.wikipedia.org/wiki/Set-builder_notation
+  FORALL,
+  EXISTS,
+  IN,
+  SUCHTHAT,
+
+  // INTERVALS
+  
+  OPENEDINTERVALSTART,
+  OPENEDINTERVALEND,
+  CLOSEDINTERVALSTART,
+  CLOSEDINTERVALEND,
 };
 
 #endif

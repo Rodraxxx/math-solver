@@ -15,6 +15,10 @@ enum class AuxiliaryTypes
   RIGHTKEY,
   LEFTKET,
   RIGHTKET,
+
+  // SEPARATION
+
+  COMMA,
 };
 
 #endif

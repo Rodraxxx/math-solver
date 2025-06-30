@@ -64,32 +64,46 @@ std::unordered_map<std::string_view,Constants> constants =
   {"phi",Constants::PHI}
 };
 
-// Priority list is ordered in descending order
-constexpr Functions priorityList[] = {
-  // Unary
-  Functions::FACTORIAL,
-  Functions::SQRT,
-  Functions::PRIMORIAL,
-
-  Functions::CHOOSE,
-  Functions::FKSTIRLING,
-  Functions::UNGSTIRLING,
-  Functions::SKSTIRLING,
-  // Basic
-  Functions::EXPONENTIATION,
-  Functions::MULTIPLICATION,
-  Functions::DIVISION,
-  Functions::ADDITION,
-  Functions::SUBTRACTION,
-  // Relational operators
-  Functions::EQUALS,
+constexpr size_t getPriority(Functions f)
+{
+  switch(f) {
+    case Functions::ADDITION:
+    case Functions::SUBTRACTION:
+      return 20;
+    case Functions::MULTIPLICATION:
+    case Functions::DIVISION:
+    case Functions::MODULO:
+      return 30;
+    case Functions::EXPONENTIATION:
+      return 40;
+    case Functions::TETRATION:
+      return 50;
+    case Functions::UNSUBTRACTION:
+      return 100;
+    case Functions::FACTORIAL:
+      return 110;
+    case Functions::EQUALS:
+    case Functions::GT:
+    case Functions::LT:
+    case Functions::GE:
+    case Functions::LE:
+      return 10;
+    case Functions::NULLOPERATOR:
+      return 200;
+    default:
+      return 50;
+  }
 };
 
 struct FunctionProperties
 {
   const unsigned short args;
-  const bool asociative;
-  FunctionProperties(const unsigned short args, const bool asociative) : args(args), asociative(asociative) {};
+  const bool associative;
+  // This property may be interpreted as the fixing of unary operations (left: false, right: true)
+  // e.g. FACTORIAL: x!, associative: true because it's postfix        PRIMORIAL: #x, associative: false because it's prefix
+  // It doesn't affect functions like SQRT which are written using commands
+
+  FunctionProperties(const unsigned short args, const bool associative) : args(args), associative(associative) {};
 };
 
 std::unordered_map<Functions,FunctionProperties> properties =
@@ -105,16 +119,17 @@ std::unordered_map<Functions,FunctionProperties> properties =
   {Functions::UNGSTIRLING,FunctionProperties(2,false)},
   {Functions::SKSTIRLING,FunctionProperties(2,false)},
   
-  {Functions::FACTORIAL,FunctionProperties(1,false)},
+  {Functions::FACTORIAL,FunctionProperties(1,true)},
   {Functions::PRIMORIAL,FunctionProperties(1,false)},
   {Functions::SQRT,FunctionProperties(1,false)},
+  {Functions::UNSUBTRACTION,FunctionProperties(1,false)},
   
   {Functions::EQUALS,FunctionProperties(2,true)}
 };
 
 struct ASTLeaf
 {
-  std::variant<AtomicTypes,Functions, AuxiliaryTypes> type;
+  std::variant<AtomicTypes, Functions, AuxiliaryTypes> type;
   std::variant<int,double> value; // Value may be interpreted in different forms (double, bool, ...) depending on the type
   std::string toString()
   {
@@ -187,12 +202,6 @@ struct AST
   }
 };
 
-size_t getPriority(Functions f)
-{
-  auto size = sizeof(priorityList)/sizeof(Functions);
-  return size-std::distance(priorityList, std::find(priorityList, priorityList + size, f));
-};
-
 class Tokenizer
 {
   public:
@@ -215,6 +224,16 @@ class Tokenizer
       } else if (std::isalpha(current)) {
         //tokens.emplace_back(parseVariable());
       } else if (operators.find(current) != operators.end()) {
+        // Hard code unary addition and subtraction
+        if (current == '-')
+        {
+          if (tokens.empty() || tokens.back().type.index() == 1 && !(properties.at(std::get<Functions>(tokens.back().type)).args == 1 && properties.at(std::get<Functions>(tokens.back().type)).associative))
+          {
+            tokens.emplace_back(ASTLeaf(Functions::UNSUBTRACTION));
+            pos++;
+            continue;
+          }
+        }
         tokens.emplace_back(ASTLeaf(operators[current]));
         pos++;
       } else {
@@ -467,7 +486,7 @@ int main()
 {
   std::cout << "Heap allocations: " << numOfHeapAllocations << "\n";
 
-  Tokenizer t = Tokenizer("\\e^(\\i*\\pi)=-1");
+  Tokenizer t = Tokenizer("3!-2!=4*-1*-1");
   Parser p;
   auto RPN = p.RPN(t.Tokenize());
   auto copy = RPN;
