@@ -2,6 +2,6 @@
 #include <string>
 
 int main() {
-    std::cout << "φ" << '\n';
-    return 0;
+    std::string_view test = "1 =1";
+    std::cout << test << '\n' << test.size() << '\n';
 }

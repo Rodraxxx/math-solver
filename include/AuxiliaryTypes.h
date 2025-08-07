@@ -3,22 +3,29 @@
 
 enum class AuxiliaryTypes
 {
+  // NULL AUXILIARY TYPE
+
+  NULLAUX,
+
   // GROUPING
 
   LEFTPARENTHESIS,
   RIGHTPARENTHESIS,
   LEFTBRACKET,
   RIGHTBRACKET,
-  LEFTABS,
-  RIGHTABS,
   LEFTKEY,
   RIGHTKEY,
-  LEFTKET,
-  RIGHTKET,
 
-  // SEPARATION
+  // The ket symbol will be using function notation
+
+  // SEPARATORS
 
   COMMA,
+
+  // SCRIPTING CHARACTERS
+
+  SUBSCRIPT,
+  SUPERSCRIPT,
 };
 
 #endif

@@ -2,7 +2,7 @@
 #define ATOMIC_TYPES_H
 
 enum class AtomicTypes {
-  // NULLTYPE
+  // NULL TYPE
   
   NULLTYPE,
   // ERROR TYPES

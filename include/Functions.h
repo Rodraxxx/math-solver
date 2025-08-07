@@ -26,12 +26,8 @@ enum class Functions {
   MULTIPLICATION,
   DIVISION,
   EXPONENTIATION,
-  PSQRT, // PRINCIPAL SQUARE ROOT
   SQRT,
-  PROOT, // PRINCIPAL ROOT
-  ROOT,
   LOG,
-  CLOG, // COMPLEX LOG
   ABS,
 
   // SPECIAL ARITHMETIC OPERATIONS
@@ -143,7 +139,7 @@ enum class Functions {
   CHOOSE,
   CEIL,
   FLOOR,
-  FRAC,
+  FRAC, // FRACTIONAL PART (Not to confuse with \frac{}{})
   ROUND,
   SIGN,
   FIB, // FIBBONACCI
@@ -187,14 +183,52 @@ enum class Functions {
   FORALL,
   EXISTS,
   IN,
+  NIN,
+  CONTAINS,
+  NCONTAINS,
   SUCHTHAT,
+  UNION,
+  INTERSECTION,
+  CARTESIAN, // CARTESIAN PRODUCT
 
-  // INTERVALS
-  
-  OPENEDINTERVALSTART,
-  OPENEDINTERVALEND,
-  CLOSEDINTERVALSTART,
-  CLOSEDINTERVALEND,
+  // LARGE OPERATORS
+  // https://www.reddit.com/r/math/comments/dh6240/are_there_any_other_concatenation_notations_like/
+
+  LIMIT,
+  INT,
+  SUM,
+  PROD,
+  BIGUNION,
+  BIGINTERSECTION,
+  BIGAND,
+  BIGOR,
+  BIGOPLUS,
+  BIGOTIMES,
+  BIGWEDGE,
+  COPROD,
+
+  // LINEAR ALGEBRA
+
+  VEC,
+  MATRIX,
+  INTERVAL,
+
+  // INTERVALTYPES
+  // These are not accessible through commands; they're the enum-sintactic values that the AST form of intervals adopt according to their ends
+
+  CCINTV, // CLOSED-CLOSED INTERVAL
+  COINTV, // CLOSED-OPENED INTERVAL
+  OCINTV, // OPENED-CLOSED INTERVAL
+  OOINTV, // OPENED-OPENED INTERVAL
+
+  // COMPLEX ANALISIS
+
+  RE, // REAL PART
+  IM, // IMAGINARY PART
+
+  // INDEXING
+
+  INDEX, // Used when accessing an element of an ordered iterable e.g. a_i
 };
 
 #endif
